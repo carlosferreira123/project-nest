@@ -1,0 +1,5 @@
+version: 2.35.1
+
+services:
+ postgres:
+   container_name: nest-clean-pg
