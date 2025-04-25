@@ -1,22 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Controller, Get } from "@nestjs/common";
+import { AppService } from "./app.service";
 
-describe('AppController', () => {
-  let appController: AppController;
 
-  beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService],
-    }).compile();
 
-    appController = app.get<AppController>(AppController);
-  });
+@Controller('/api')
+export class AppController {
+  constructor(private readonly appService: AppService) {} // ✅ Correto: "constructor"
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
-    });
-  });
-});
+  @Get('/hello')
+  getHello(): string {
+    return 'aaaaaaa'; // Ou use this.appService.getHello() se o serviço tiver um método
+  }
+}
